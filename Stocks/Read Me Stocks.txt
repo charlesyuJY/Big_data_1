@@ -1,0 +1,13 @@
+In this exercise, you will try to predict returns. We have made available to you three datasets: One with the returns data (Returns_Data.csv), another with stock characteristic data (Stock_Characteristics_Data.csv) and one with time series data (Time_Series_Data.csv)
+
+1) Returns_Data.csv
+This is the main file you will want to work with. It contains the monthyl returns for 500 stocks. Along with the returns, there are fourth other variables. VOL is the sum of the trading volumes during that month. It is expressed in hundred shares. PRC is the price of the stock. VWRETD (EWRETD) contain the monthly returns, including all dividends on a value (equal)-weighted market portfolio (SP500). The data was downloaded from CRSP.
+
+2) Stock_Characteristics_Data.csv 
+This file contains stock characteristics, as published by firms every quarter (10-Q). Be careful how you merge the data. As it is only available to investors after the data is released. The data comes from Compustat/Capital IQ.
+
+3) Time_Series_Data.csv
+This file contains time series data from Goyal and Welsh's paper "A Comprehensive Look at the Empirical Performance of Equity Premium Prediction". The data was downloaded from Ivo Welsh's website (https://www.ivo-welch.info/professional/goyal-welch/)
+
+4) StockDataDictionary.xlsx
+This file contains a dictionary explaining the variables.
