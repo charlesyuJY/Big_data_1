@@ -1,10 +1,10 @@
 import numpy as np
 import pandas as pd
 
-def load_data(macro_target, rating_filter=None):
+def load_data(macro_target, source_path, rating_filter=None):
     # Load original datasets
-    df_stock_characteristics = pd.read_csv('../Stocks/Stock_Characteristics_Data_rating.csv')
-    df_time_series = pd.read_csv('../Stocks/Time_Series_Data.csv')
+    df_stock_characteristics = pd.read_csv(f'{source_path}/Stock_Characteristics_Data_rating.csv')
+    df_time_series = pd.read_csv(f'{source_path}/Time_Series_Data.csv')
 
     # Filter ratings
     if rating_filter is not None:
