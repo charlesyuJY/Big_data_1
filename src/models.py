@@ -431,6 +431,6 @@ def train_multiple_cv(df_X, df_y, model, models_folder_path, model_type, model_n
     
     predictions.append(train_model_cv(df_X[[regressor]], df_y, model, models_folder_path, model_type,
                                       f'{model_name} {regressor}', train_size, cv_type, cv_size, param_grid,
-                                      param_grid_iter, False, force_save, classification=classification))
+                                      param_grid_iter, classification, False, force_save))
 
   return PredictionSet(predictions, regressors if regressor_names is None else regressor_names)
