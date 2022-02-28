@@ -1,7 +1,8 @@
 import numpy as np
 import pandas as pd
+import yfinance as yf
 
-def load_data(macro_target, source_path, rating_filter=None):
+def load_data(macro_target, source_path, classification=False, rating_filter=None):
     # Load original datasets
     df_stock_characteristics = pd.read_csv(f'{source_path}/Stock_Characteristics_Data_rating.csv')
     df_time_series = pd.read_csv(f'{source_path}/Time_Series_Data.csv')
@@ -31,6 +32,13 @@ def load_data(macro_target, source_path, rating_filter=None):
     # Extract the macro target variable for prediction
     df_macro = df_time_series[['year_month', macro_target]]
     df_macro = df_macro.set_index('year_month')
+    if classification:
+      df_macro[macro_target] = df_macro[macro_target].rolling(2)\
+        .apply(lambda x: (x.iloc[1] - x.iloc[0]) > 0)\
+        .dropna()\
+        .astype(int)
+        
+
 
     # Merge predictor and target variables together
     # Shift predictor variables forward 1 month
@@ -43,3 +51,21 @@ def load_data(macro_target, source_path, rating_filter=None):
     df_y = df_data[df_macro.columns]
 
     return df_X, df_y
+
+def etf_data(target):
+  start_date = '2010-01-01'
+  end_date = '2022-02-24'
+
+  if target.lower() == 'aaa':
+    ticker = 'QLTA'
+  elif target.lower() == 'baa':
+    ticker = 'MBBB'
+  
+  ticker_df = yf.download(ticker, start_date, end_date, progress=False)
+  ticker_df['return'] = np.log(ticker_df.Close) - np.log(ticker_df.Close.shift(1))
+
+  return_df = pd.DataFrame(ticker_df['return'])
+  return_df['year_month'] = return_df.index.astype(str).str[:7]
+  monthly_return = return_df.groupby('year_month').sum()
+  
+  return monthly_return
