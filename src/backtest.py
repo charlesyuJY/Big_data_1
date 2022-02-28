@@ -1,4 +1,5 @@
 import matplotlib.cm as cm
+import pandas as pd
 
 def backtest_signal(monthly_return, predictions):
   df_predictions = predictions.df_predictions.copy(deep=True)
