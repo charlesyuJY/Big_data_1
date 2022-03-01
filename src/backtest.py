@@ -1,3 +1,4 @@
+from .data_source import *
 import matplotlib.cm as cm
 
 def backtest_signal(monthly_return, predictions):
@@ -29,8 +30,8 @@ def backtest_plot(macro_target, predictions_list):
   for color, prediction in zip(colors, predictions_list):
     df_return = backtest_signal(monthly_return, prediction)
     y = df_return[['cum_return']]
-    annual_return = round(df_return["strategy_return"].mean() * 12, 4)
-    labels.append(f'{prediction.model_name} (AR = {annual_return * 100} %)')
+    annual_return = df_return["strategy_return"].mean() * 12
+    labels.append(f'{prediction.model_name} (AR = {round(annual_return * 100, 2)} %)')
     y.plot(y=['cum_return'], color=color, ax=ax)
   ax.set_ylabel('Return')
   ax.legend(labels, frameon=False)
