@@ -60,6 +60,8 @@ def etf_data(target):
     ticker = 'QLTA'
   elif target.lower() == 'baa':
     ticker = 'MBBB'
+  elif target.lower() == 'tbl':
+    ticker = 'govt'
   
   ticker_df = yf.download(ticker, start_date, end_date, progress=False)
   ticker_df['return'] = np.log(ticker_df.Close) - np.log(ticker_df.Close.shift(1))
