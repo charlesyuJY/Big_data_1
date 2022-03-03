@@ -31,7 +31,11 @@ def backtest_plot(macro_target, predictions_list):
   target_cum_return = ((1 + monthly_return).cumprod() - 1) * 100
   annual_return = monthly_return['return'].mean() * 12
   target_cum_return.plot(color=colors[0], ax=ax)
-  labels = [f'Treasury Bill ETF (AR = {round(annual_return * 100, 2)} %)']
+  if macro_target.lower() == 'AAA':
+    target_label = 'iShares Aaa - A Rated Corporate Bond ETF'
+  else:
+    target_label = 'iShares U.S. Treasury Bond ETF'
+  labels = [f'{target_label} (AR = {round(annual_return * 100, 2)} %)']
   for color, prediction in zip(colors[1:], predictions_list):
     df_return = backtest_signal(monthly_return, prediction)
     y = df_return[['cum_return']] * 100
