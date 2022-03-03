@@ -31,7 +31,7 @@ def backtest_plot(macro_target, predictions_list):
   target_cum_return = ((1 + monthly_return).cumprod() - 1) * 100
   annual_return = monthly_return['return'].mean() * 12
   target_cum_return.plot(color=colors[0], ax=ax)
-  if macro_target.lower() == 'AAA':
+  if macro_target.lower() == 'aaa':
     target_label = 'iShares Aaa - A Rated Corporate Bond ETF'
   else:
     target_label = 'iShares U.S. Treasury Bond ETF'
